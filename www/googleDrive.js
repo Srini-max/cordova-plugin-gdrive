@@ -1,32 +1,24 @@
-function GoogleDrive() {}
+var exec = require('cordova/exec');
 
-GoogleDrive.prototype.downloadFile = function (destinationURL,fileid,successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, "GoogleDrive", "downloadFile", [destinationURL,fileid]);
-};
 
-GoogleDrive.prototype.uploadFile = function (fpath,appfolder,successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, "GoogleDrive", "uploadFile", [fpath,appfolder]);
-};
+exports.signIn = function (successCallback, errorCallback) {
+    return new Promise(function (resolve, reject) {
+      exec(successCallback, errorCallback, "GoogleDrive", "signIn")
+    })
+}
 
-GoogleDrive.prototype.fileList = function (appfolder,successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, "GoogleDrive", "fileList", [appfolder]);
-};
+exports.signOut = function (successCallback, errorCallback) {
+    exec(successCallback, errorCallback, "GoogleDrive", "signOut");
+}
 
-GoogleDrive.prototype.deleteFile = function (fileid,successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, "GoogleDrive", "deleteFile", [fileid]);
-};
 
-GoogleDrive.prototype.requestSync = function(returnFiles,successCallback,errorCallback){
-    cordova.exec(successCallback,errorCallback,"GoogleDrive","requestSync",[returnFiles]);
-};
+exports.fileList = function ( appfolder,successCallback, errorCallback) {
+    return new Promise(function (resolve, reject) {
+      exec(successCallback, errorCallback, "GoogleDrive", "fileList", [appfolder])
+    })
+}
 
-GoogleDrive.install = function () {
-    if (!window.plugins) {
-        window.plugins = {};
-    }
-
-    window.plugins.gdrive = new GoogleDrive();
-    return window.plugins.gdrive;
-};
-
-cordova.addConstructor(GoogleDrive.install);
+exports.downloadFiles = function(downloadFiles,successCallback, errorCallback)
+{
+    exec(successCallback,errorCallback,"GoogleDrive", "downloadFiles",downloadFiles);
+}
