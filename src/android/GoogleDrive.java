@@ -419,7 +419,7 @@ public class GoogleDrive extends CordovaPlugin implements GoogleApiClient.Connec
                             try {
                                         Log.i(TAG, file.getTitle());
                                         Log.i(TAG, file.getCreatedDate().toString());
-                                        Log.i(TAG, file.getDriveId());
+                                        Log.i(TAG, file.getDriveId().encodeToString());
                                 response.put(new JSONObject().put("name", file.getTitle()).put("modifiedTime", file.getCreatedDate().toString()).put("id", file.getDriveId()));
                             }catch (JSONException ex){}
                         }
