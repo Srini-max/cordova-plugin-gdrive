@@ -1,4 +1,6 @@
-function GoogleDrive() {}
+
+cordova.addConstructor(function() {
+    function GoogleDrive() {}
 
 GoogleDrive.prototype.downloadFile = function (destinationURL,fileid,successCallback, errorCallback) {
     cordova.exec(successCallback, errorCallback, "GoogleDrive", "downloadFile", [destinationURL,fileid]);
@@ -20,13 +22,7 @@ GoogleDrive.prototype.requestSync = function(returnFiles,successCallback,errorCa
     cordova.exec(successCallback,errorCallback,"GoogleDrive","requestSync",[returnFiles]);
 };
 
-GoogleDrive.install = function () {
-    if (!window.plugins) {
-        window.plugins = {};
-    }
-
-    window.plugins.gdrive = new GoogleDrive();
-    return window.plugins.gdrive;
-};
-
-cordova.addConstructor(GoogleDrive.install);
+   
+    window.GoogleDrive = new GoogleDrive()
+    return window.GoogleDrive
+});
