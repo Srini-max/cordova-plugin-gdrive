@@ -68,10 +68,12 @@ public class GoogleDrive extends CordovaPlugin implements GoogleApiClient.Connec
         super.initialize(cordova, webView);
         this.cordova = cordova;
         if (mGoogleApiClient == null) {
+            Scope SCOPE_DRIVEFILES_READ =new Scope("https://www.googleapis.com/auth/drive.metadata");
             mGoogleApiClient = new GoogleApiClient.Builder(cordova.getActivity())
                     .addApi(Drive.API)
                     .addScope(Drive.SCOPE_FILE)
                     .addScope(Drive.SCOPE_APPFOLDER)
+                    .addScope(SCOPE_DRIVEFILES_READ)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .build();
