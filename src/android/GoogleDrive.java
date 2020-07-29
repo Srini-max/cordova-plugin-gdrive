@@ -417,7 +417,7 @@ public class GoogleDrive extends CordovaPlugin implements GoogleApiClient.Connec
                         JSONArray response = new JSONArray();
                         for (Metadata file: flist) {
                             try {
-                                        Log.i(TAG, file.getTitle();
+                                        Log.i(TAG, file.getTitle());
                                         Log.i(TAG, file.getCreatedDate().toString());
                                         Log.i(TAG, file.getDriveId());
                                 response.put(new JSONObject().put("name", file.getTitle()).put("modifiedTime", file.getCreatedDate().toString()).put("id", file.getDriveId()));
