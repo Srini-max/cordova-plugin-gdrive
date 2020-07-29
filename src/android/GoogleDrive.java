@@ -159,6 +159,10 @@ public class GoogleDrive extends CordovaPlugin implements GoogleApiClient.Connec
                         } else {
                             mGoogleApiClient.connect();
                             Log.i(TAG, "Enetering  GDrive fileList failure");
+                            if (mGoogleApiClient.isConnected()) {
+                            fileList(appFolder);
+                             Log.i(TAG, "Enetering  GDrive fileList");
+                             } 
                         }
                     }catch(JSONException ex){
                         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,ex.getLocalizedMessage()));
@@ -390,16 +394,7 @@ public class GoogleDrive extends CordovaPlugin implements GoogleApiClient.Connec
         /* Allowed MIME types: https://developers.google.com/drive/v3/web/mime-types */
         Query.Builder qb = new Query.Builder();
         qb.addFilter(Filters.and(
-          Filters.and(Filters.eq(SearchableField.TRASHED, false)),
-          Filters.or(
-            Filters.eq(SearchableField.MIME_TYPE, "application/vnd.google-apps.folder"),
-            Filters.eq(SearchableField.MIME_TYPE, "application/vnd.google-apps.photo"),
-            Filters.eq(SearchableField.MIME_TYPE, "application/vnd.google-apps.video"),
-            Filters.eq(SearchableField.MIME_TYPE, "application/vnd.google-apps.audio"),
-            Filters.eq(SearchableField.MIME_TYPE, "application/vnd.google-apps.file"),
-            Filters.eq(SearchableField.MIME_TYPE, "application/vnd.google-apps.unknown")
-            )
-          )
+          Filters.and(Filters.eq(SearchableField.TRASHED, false)))
         );
 
         if(appFolder) {
@@ -408,6 +403,7 @@ public class GoogleDrive extends CordovaPlugin implements GoogleApiClient.Connec
         }
 
         Query query = qb.build();
+                                        Log.i(TAG,"Entered inn to google drive");
 
         Drive.DriveApi.query(mGoogleApiClient, query)
                 .setResultCallback(new ResultCallback<DriveApi.MetadataBufferResult>() {
@@ -421,6 +417,9 @@ public class GoogleDrive extends CordovaPlugin implements GoogleApiClient.Connec
                         JSONArray response = new JSONArray();
                         for (Metadata file: flist) {
                             try {
+                                        Log.i(TAG, file.getTitle();
+                                        Log.i(TAG, file.getCreatedDate().toString());
+                                        Log.i(TAG, file.getDriveId());
                                 response.put(new JSONObject().put("name", file.getTitle()).put("modifiedTime", file.getCreatedDate().toString()).put("id", file.getDriveId()));
                             }catch (JSONException ex){}
                         }
