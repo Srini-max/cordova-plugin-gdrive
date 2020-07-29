@@ -11,7 +11,7 @@
     </engines>
 
     <js-module src="www/googleDrive.js" name="GoogleDrive">
-        <clobbers target="window.plugins.gdrive" />
+        <clobbers target="GoogleDrive" />
     </js-module>
 
     <platform name="android">
