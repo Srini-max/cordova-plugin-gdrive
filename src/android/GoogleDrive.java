@@ -74,7 +74,7 @@ public class GoogleDrive extends CordovaPlugin implements GoogleApiClient.Connec
                     .addScope(Drive.SCOPE_FILE)
                     .addScope(Drive.SCOPE_APPFOLDER)
                     .addScope(new Scope("https://www.googleapis.com/auth/drive"))
-                    .addScope(new Scope("https://www.googleapis.com/auth/drive.readonly"))
+                    //.addScope(new Scope("https://www.googleapis.com/auth/drive.readonly"))
                     //.addScope(SCOPE_DRIVEFILES_READ)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
